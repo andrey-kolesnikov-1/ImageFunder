@@ -1,0 +1,13 @@
+<div *ngIf="photo" class="card">
+  <h3 class="card-header" [title]="photo.title">{{ photo.title }}</h3>
+  <div class="img-wrap">
+    <img [src]="photo.url_z" alt="Not Image" (click)="select()" />
+  </div>
+  <div class="card-actions">
+    <button mat-raised-button (click)="delete()">Remove it!</button>
+  </div>
+  <div class="tags">
+    <h3>Tags:</h3>
+    <p [ngClass]="{'empty': !photo.tags}">{{ photo.tags ? photo.tags : 'None' }}</p>
+  </div>
+</div>

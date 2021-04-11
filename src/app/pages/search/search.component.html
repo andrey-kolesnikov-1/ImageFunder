@@ -1,0 +1,31 @@
+<mat-form-field class="input-wrapper" appearance="outline">
+  <mat-label>Search</mat-label>
+  <input #input matInput type="text" [(ngModel)]="value" placeholder="Find images">
+  <button mat-button *ngIf="value" matSuffix mat-icon-button aria-label="Clear" (click)="clearInput()">
+    <mat-icon>close</mat-icon>
+  </button>
+</mat-form-field>
+
+<h3 class="status" *ngIf="loading && !photos || loading && photos && photos.total === '0'">Loading...</h3>
+<h3 class="status" *ngIf="!loading && !photos">No images here.Would you like to search for anything else?</h3>
+<h3 class="status" *ngIf="!loading && photos && photos.total === '0'">Images not found</h3>
+<h3 class="status" *ngIf="photos && photos.total !== '0'">Found {{ formatNumbers(photos.total) }} images</h3>
+
+<div *ngIf="photos && photos.pages !== 0 && photos.perpage <= +photos.total" class="control">
+  <pagination-controls (pageChange)="setPage($event)"></pagination-controls>
+  <i [ngClass]="{'load': loading}" class="material-icons">refresh</i>
+</div>
+
+<div *ngIf="photos" class="card-wrapper">
+  <app-card-found-image 
+  *ngFor="let photo of photos.photo | paginate: paginationOptions"
+   [photo]="photo"
+   (onSelect)="showImage($event)"
+   (onSave)="savePhoto($event)"
+   ></app-card-found-image>
+</div>
+
+<app-view-image [open]="isShowImage" (onClose)="isShowImage = false">
+  <img src="{{ imageUrl }}" alt="Not Found">
+</app-view-image>
+
