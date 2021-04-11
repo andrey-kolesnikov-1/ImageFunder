@@ -8,6 +8,8 @@
   </div>
   <div class="tags">
     <h3>Tags:</h3>
-    <p [ngClass]="{'empty': !photo.tags}">{{ photo.tags ? photo.tags : 'None' }}</p>
+    <p [ngClass]="{ empty: !photo.tags }">
+      {{ photo.tags ? photo.tags : "None" }}
+    </p>
   </div>
 </div>

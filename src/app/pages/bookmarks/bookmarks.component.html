@@ -1,17 +1,21 @@
+<h1 class="status">
+  List of saved images <small>(total: {{ bookmarks.length }})</small>
+</h1>
 
-<h1 class="status">List of saved images <small>(total: {{bookmarks.length}})</small></h1>
-
-<pagination-controls *ngIf="bookmarks.length > 100" (pageChange)="setPage($event)"></pagination-controls>
+<pagination-controls
+  *ngIf="bookmarks.length > 100"
+  (pageChange)="setPage($event)"
+></pagination-controls>
 
 <div class="card-wrapper">
   <app-card-bookmark
-  *ngFor="let photo of bookmarks | paginate: paginationOptions"
-  [photo]="photo"
-  (onSelect)="showImage($event)"
-  (onDelete)="deleteBookmark($event)"
-   ></app-card-bookmark>
+    *ngFor="let photo of bookmarks | paginate: paginationOptions"
+    [photo]="photo"
+    (onSelect)="showImage($event)"
+    (onDelete)="deleteBookmark($event)"
+  ></app-card-bookmark>
 </div>
 
 <app-view-image [open]="isShowImage" (onClose)="isShowImage = false">
-  <img src="{{ imageUrl }}" alt="Not Found">
+  <img src="{{ imageUrl }}" alt="Not Found" />
 </app-view-image>

@@ -7,10 +7,9 @@ import { StoreService } from 'src/app/services/store.service';
 @Component({
   selector: 'app-bookmarks',
   templateUrl: './bookmarks.component.html',
-  styleUrls: ['./bookmarks.component.scss']
+  styleUrls: ['./bookmarks.component.scss'],
 })
 export class BookmarksComponent implements OnInit, OnDestroy {
-
   bookmarks: Photo[] = [];
   imageUrl: string = '';
   isShowImage: boolean = false;
@@ -21,21 +20,22 @@ export class BookmarksComponent implements OnInit, OnDestroy {
   };
   private unsubscribe$: Subject<any> = new Subject<any>();
 
-  constructor(private storeService: StoreService) { }
+  constructor(private storeService: StoreService) {}
 
   ngOnInit(): void {
-    this.storeService.bookmarks$.pipe(takeUntil(this.unsubscribe$))
-    .subscribe(photos => {
-      this.bookmarks = photos;
-    });
+    this.storeService.bookmarks$
+      .pipe(takeUntil(this.unsubscribe$))
+      .subscribe((photos) => {
+        this.bookmarks = photos;
+      });
     this.storeService.getPhotos();
   }
-  
+
   setPage(page: number): void {
     this.paginationOptions.currentPage = page;
   }
 
-  deleteBookmark(id: string):void {
+  deleteBookmark(id: string): void {
     this.storeService.delete(id);
   }
 

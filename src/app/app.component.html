@@ -40,36 +40,29 @@
   <form [formGroup]="formRegistr">
     <mat-form-field class="input-auth">
       <mat-label>Login</mat-label>
-      <input
-        #input
-        matInput
-        type="text"
-        formControlName="login"
-      />
+      <input #input matInput type="text" formControlName="login" />
     </mat-form-field>
-  <mat-form-field class="input-auth">
-    <mat-label>Password</mat-label>
-    <input
-      #input
-      matInput
-      type="password"
-      formControlName="password_1"
-    />
-  </mat-form-field>
-  <mat-form-field class="input-auth">
-    <mat-label>Repeat Password</mat-label>
-    <input
-      #input
-      matInput
-      type="password"
-      formControlName="password_2"
-    />
-  </mat-form-field>
-</form>
-<p class="error" *ngIf="errorPassword">Passwords must match</p>
+    <mat-form-field class="input-auth">
+      <mat-label>Password</mat-label>
+      <input #input matInput type="password" formControlName="password_1" />
+    </mat-form-field>
+    <mat-form-field class="input-auth">
+      <mat-label>Repeat Password</mat-label>
+      <input #input matInput type="password" formControlName="password_2" />
+    </mat-form-field>
+  </form>
+  <p class="error" *ngIf="errorPassword">Passwords must match</p>
   <div class="sing-in-actions">
-    <button mat-raised-button (click)="toRegist()" [disabled]="formRegistr.invalid">Register</button>
-    <button mat-raised-button (click)="toggleToSingIn()" [disabled]="!user">Sing in</button>
+    <button
+      mat-raised-button
+      (click)="toRegist()"
+      [disabled]="formRegistr.invalid"
+    >
+      Register
+    </button>
+    <button mat-raised-button (click)="toggleToSingIn()" [disabled]="!user">
+      Sing in
+    </button>
   </div>
 </app-modal>
 
@@ -78,26 +71,24 @@
   <form [formGroup]="formSingIn">
     <mat-form-field class="input-auth">
       <mat-label>Login</mat-label>
-      <input
-        #input
-        matInput
-        type="text"
-        formControlName="login"
-      />
+      <input #input matInput type="text" formControlName="login" />
     </mat-form-field>
-  <mat-form-field class="input-auth">
-    <mat-label>Password</mat-label>
-    <input
-      #input
-      matInput
-      type="password"
-      formControlName="password"
-    />
-  </mat-form-field>
-</form>
-<p class="error" *ngIf="errorSingIn">Invalid login or password</p>
+    <mat-form-field class="input-auth">
+      <mat-label>Password</mat-label>
+      <input #input matInput type="password" formControlName="password" />
+    </mat-form-field>
+  </form>
+  <p class="error" *ngIf="errorSingIn">Invalid login or password</p>
   <div class="sing-in-actions">
-    <button mat-raised-button (click)="toSingIn()" [disabled]="formSingIn.invalid">Sing in</button>
-    <button mat-raised-button (click)="toggleToRegistration()">Registration</button>
+    <button
+      mat-raised-button
+      (click)="toSingIn()"
+      [disabled]="formSingIn.invalid"
+    >
+      Sing in
+    </button>
+    <button mat-raised-button (click)="toggleToRegistration()">
+      Registration
+    </button>
   </div>
 </app-modal>

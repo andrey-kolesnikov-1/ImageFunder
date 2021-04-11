@@ -1,6 +1,6 @@
 import { Component, HostListener, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { fromEvent, Subject, Subscription } from 'rxjs';
+import { fromEvent, Subject } from 'rxjs';
 import { debounceTime, takeUntil } from 'rxjs/operators';
 
 @Component({
@@ -25,13 +25,13 @@ export class AppComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.formRegistr = new FormGroup({
-      'login': new FormControl('', Validators.required),
-      'password_1': new FormControl('', Validators.required),
-      'password_2': new FormControl('', Validators.required),
+      login: new FormControl('', Validators.required),
+      password_1: new FormControl('', Validators.required),
+      password_2: new FormControl('', Validators.required),
     });
     this.formSingIn = new FormGroup({
-      'login': new FormControl('', Validators.required),
-      'password': new FormControl('', Validators.required),
+      login: new FormControl('', Validators.required),
+      password: new FormControl('', Validators.required),
     });
 
     setTimeout(() => {
@@ -44,7 +44,7 @@ export class AppComponent implements OnInit, OnDestroy {
   }
 
   @HostListener('window:focus')
-  doSomething() {
+  doSomething(): void {
     if (!this.isRegistrWindow && !this.isAuthWindow) {
       fromEvent(window, 'mousemove')
         .pipe(debounceTime(this.downtime * 1000), takeUntil(this.unsubscribe$))
@@ -56,14 +56,17 @@ export class AppComponent implements OnInit, OnDestroy {
   }
 
   @HostListener('window:blur')
-  doSomethingto() {
+  doSomethingto(): void {
     this.unsubscribe$.next();
   }
 
-  toSingIn(){
+  toSingIn(): void {
     let user: any = JSON.parse(localStorage.getItem('user') || '');
     if (user !== null) {
-      if (this.formSingIn.value.login === user.login && this.formSingIn.value.password === user.password_1) {
+      if (
+        this.formSingIn.value.login === user.login &&
+        this.formSingIn.value.password === user.password_1
+      ) {
         this.isAuthWindow = false;
         this.formSingIn.reset();
         this.doSomething();
@@ -73,8 +76,10 @@ export class AppComponent implements OnInit, OnDestroy {
     }
   }
 
-  toRegist() {
-    if (this.formRegistr.value.password_1 === this.formRegistr.value.password_2) {
+  toRegist(): void {
+    if (
+      this.formRegistr.value.password_1 === this.formRegistr.value.password_2
+    ) {
       localStorage.setItem('user', JSON.stringify(this.formRegistr.value));
       this.isRegistrWindow = false;
       this.formRegistr.reset();
@@ -84,21 +89,21 @@ export class AppComponent implements OnInit, OnDestroy {
     }
   }
 
-  toggleToRegistration() {
+  toggleToRegistration(): void {
     this.isAuthWindow = false;
     setTimeout(() => {
       this.isRegistrWindow = true;
     }, 250);
   }
 
-  toggleToSingIn() {
+  toggleToSingIn(): void {
     this.isRegistrWindow = false;
     setTimeout(() => {
       this.isAuthWindow = true;
     }, 250);
   }
 
-  GoOut() {
+  GoOut(): void {
     localStorage.removeItem('user');
     this.isRegistrWindow = true;
     this.user = false;
