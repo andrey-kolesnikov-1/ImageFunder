@@ -9,7 +9,7 @@ import { debounceTime, takeUntil } from 'rxjs/operators';
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent implements OnInit, OnDestroy {
-  title = 'ImageFunder';
+  // title = 'Image Finder';
 
   user: boolean = false;
   isAuthWindow: boolean = false;
